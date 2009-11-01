@@ -85,7 +85,8 @@ module FakeFS
     def self.mkdir(string, integer = 0)
       parent = string.split('/')
       parent.pop
-      raise Errno::ENOENT, "No such file or directory - #{string}" unless parent.join == "" || FileSystem.find(parent.join('/'))
+      parent_path = parent.join('/')
+      raise Errno::ENOENT, "No such file or directory - #{parent_path}" unless parent.join == "" || FileSystem.find(parent_path)
       FileUtils.mkdir_p(string)
     end
 
